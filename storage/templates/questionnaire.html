@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Анкета</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <p>
+    <h1>{{ questionnaire[1] }}</h1></p>
+    <form method="post">
+        {% for question in questions %}
+        <p><strong>{{ question[1] }}</strong></p>
+        {% for answer in answers %}
+        {% if result %}
+
+        {% if answer[0] in answers %}
+        <li><b>{{ answer[1] }} ({{ answer[2] }})</b></li>
+        {% else %}
+        <li>{{ answer[1] }} ({{ answer[2] }})</li>
+        {% endif %}
+
+        {% else %}
+        <p><input type="radio" name="{{ question[0] }}" value="{{ answer[0] }}" checked="checked"/>{{ answer[1] }}</p>
+        {% endif %}
+        {% endfor %}
+        <br>
+        {% endfor %}
+        {% if result %}
+        <p>
+            <button class="btn btn-success" type="submit" name="repeat">Заново</button>
+        </p>
+        <p>
+            <button class="btn btn-success" type="submit" name="to_main">На главную</button>
+        </p>
+        {% else %}
+        <button class="btn btn-success" type="submit" name="end_questionnaire">Закончить</button>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Регистрация</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <main class="form-signin">
+        <form method="post">
+            <h1 class="h3 mb-3 fw-normal">Зарегистрируйтесь</h1>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Введите имя" name="name">
+                <label for="floatingInput">Введите имя</label>
+            </div>
+            <br>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Введите пароль"
+                       name="password">
+                <label for="floatingPassword">Введите пароль</label>
+            </div>
+            <br>
+            <p><label>
+                <input type="checkbox" name="admin"> Администратор
+            </label></p>
+            <button class="btn btn-success" type="submit">Зарегистрироваться</button>
+        </form>
+        <label>{{ message }}</label>
+    </main>
+</div>
+{% endblock %}

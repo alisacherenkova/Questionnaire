@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Анкетирование</title>
+{% endblock %}
+
+{% block body %}
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-4 fw-normal">Анкетирование</h1>
+    <p class="fs-5 text-muted">Выберите интересующую анкету и ответьте на предоставленные вопросы</p>
+</div>
+{{ error_message }}
+<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    {% for questionnaire in questionnaires %}
+    <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">{{ questionnaire[1] }}</h4>
+            </div>
+
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">{{ questionnaire[2] }}<small
+                        class="text-muted fw-light">
+                    вопрос(ов, а)</small></h1>
+                <p><a href="{{ url_for('questionnaire', id=questionnaire[0]) }}"
+                      class="w-100 btn btn-lg btn-outline-primary">Пройти</a></p>
+                {% if admin %}
+                <form method="post">
+                    <p><button type="submit" class="w-100 btn btn-lg btn-outline-primary" name="delete"
+                            value="{{ questionnaire[0] }}">Удалить
+                    </button></p>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Добавление анкеты</title>
+{% endblock %}
+
+
+{% block body %}
+{% if adding_questionnaire %}
+<div class="container">
+    <h1>Добавление анкеты</h1>
+    <form method="post">
+        <input type="text" class="form-control" name="title" placeholder="Введите название"><br>
+        <input type="number" class="form-control" name="number_questions" placeholder="Введите количество вопросов"><br>
+        <button class="btn btn-success" type="submit" name="questionnaire_added">Продолжить</button>
+    </form>
+</div>
+{% endif %}
+
+{% if adding_questions %}
+<div class="container">
+    <h1>Добавление вопросов</h1>
+    <form method="post">
+        {% for i in range(number_questions) %}
+        <input type="text" class="form-control" name="question{{ i }}" placeholder="Введите вопрос"><br>
+        <input type="number" class="form-control" name="number_answers{{ i }}" placeholder="Введите количество ответов"><br>
+        {% endfor %}
+        <button class="btn btn-success" type="submit" name="questions_added">Продолжить</button>
+    </form>
+</div>
+{% endif %}
+
+{% if adding_answers %}
+<div class="container">
+    <h1>Добавление ответов</h1>
+    <form method="post">
+        {% for question in questions %}
+        <label>Введите ответы на вопрос "{{ question[1] }}":</label><br>
+        {% for i in range(question[2]) %}
+        <input type="text" class="form-control" name="answer{{ question[1] }}{{ i }}" placeholder="Введите ответ"><br>
+        {% endfor %}
+        {% endfor %}
+        <button class="btn btn-success" type="submit" name="answers_added">Закончить</button>
+    </form>
+</div>
+{% endif %}
+{% endblock %}

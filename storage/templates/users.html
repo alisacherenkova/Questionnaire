@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Пользователи</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h4 class="mb-3">Пользователи</h4>
+    <ul class="list-group mb-3">
+        {% for user in users %}
+        <li class="list-group-item d-flex justify-content-between lh-sm">
+            <form method="post">
+                <h6 class="my-0"><p><label>{{ user[1] }} </label>
+                </p></h6>
+                <ul>
+                    <li>id: {{ user[0] }}</li>
+                    <li>Пароль: {{ user[2] }}</li>
+                    {% if user[3] == 1 %}
+                    <li>Администратор</li>
+                    {% endif %}
+                </ul>
+                <br>
+                {% if name != user[1] %}
+                <p>
+                    <button type="submit" class="btn btn-success" name="delete" value="{{ user[0] }}">
+                        Удалить
+                    </button>
+                    {% if user[3] == 2 %}
+                    <button type="submit" class="btn btn-success" name="make_admin" value="{{ user[0]}}">Дать права
+                        администратора
+                    </button>
+                    {% endif %}
+                    {% if user[3] == 1 %}
+                    <button type="submit" class="btn btn-success" name="not_admin" value="{{ user[0] }}">Убрать
+                        права администратора
+                    </button>
+                    {% endif %}
+                </p>
+                {% endif %}
+            </form>
+        </li>
+        <br>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
